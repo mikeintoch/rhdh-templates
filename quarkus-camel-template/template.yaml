@@ -33,7 +33,7 @@ spec:
     - title: Choose a location
         required:
           - repoUrl
-        properties:
+      properties:
           repoUrl:
             title: Repository location
             type: string
