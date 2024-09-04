@@ -42,32 +42,32 @@ spec:
             allowedHosts:
               - github.com
 #here are the steps that are executed in series in the scaffolder backend
-steps:
-  - id: template 
-    name: Fetch Skeleton + Template
-    action: fetch:template
-    input:
-      url: ./skeleton
-      values:
-        name: ${{ parameters.name }}
-        package: ${{ parameters.package}}
+  steps:
+    - id: template 
+      name: Fetch Skeleton + Template
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          name: ${{ parameters.name }}
+          package: ${{ parameters.package}}
     
-  - id: publish
-    name: Publish
-    action: publish:github
-    input:
-      allowedHosts: ["github.com"]
-      description: This is ${{ parameters.name }}
-      repoUrl: ${{ parameters.repoUrl }}
-      defaultBranch: main
+    - id: publish
+      name: Publish
+      action: publish:github
+      input:
+        allowedHosts: ["github.com"]
+        description: This is ${{ parameters.name }}
+        repoUrl: ${{ parameters.repoUrl }}
+        defaultBranch: main
 
-  - id: register
-    name: Register
-    action: catalog:register
-    input:
-      repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-      catalogInfoPath: "/catalog-info.yaml"
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: "/catalog-info.yaml"
 
-output:
-  remoteUrl: ${{ steps.publis.output.remoteUrl }}
-  entityRef: ${{ steps.register.output.entityRef }}
+  output:
+    remoteUrl: ${{ steps.publis.output.remoteUrl }}
+    entityRef: ${{ steps.register.output.entityRef }}
