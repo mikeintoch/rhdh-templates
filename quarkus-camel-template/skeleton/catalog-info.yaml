@@ -8,8 +8,10 @@ metadata:
   tags:
     - java
     - quarkus
+  annotations:
+    github.com/project-slug: ${{values.destination.owner + "/" + values.destination.repo}}
   links:
-    - url: https://workspaces.openshift.com/
+    - url: https://workspaces.openshift.com/#https://github.com/${{values.destination.owner}}/${{values.destination.repo}}
       title: Openshift Dev Spaces (VS Code)
       icon: web
 spec:
@@ -19,7 +21,7 @@ spec:
   providedApis:
     - ${{values.name | dump}}
 ---
-apiVersion: backstage.op/v1alpha1
+apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: ${{values.name | dump}}
@@ -32,4 +34,3 @@ spec:
   owner: ${{values.owner | dump}}
   definition:
     $text: ./openapi.yaml
-
