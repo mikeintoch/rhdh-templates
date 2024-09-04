@@ -2,8 +2,34 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: ${{values.name | dump}}
+  {%- if values.description %}
   description: ${{values.description | dump}}
+  {%- endif %}
+  tags:
+    - java
+    - quarkus
+  links:
+    - url: https://workspaces.openshift.com/
+      title: Openshift Dev Spaces (VS Code)
+      icon: web
 spec:
   type: service
   lifecycle: experimental
   owner: ${{values.owner | dump}}
+  providedApis:
+    - ${{values.name | dump}}
+---
+apiVersion: backstage.op/v1alpha1
+kind: API
+metadata:
+  name: ${{values.name | dump}}
+  {%- if values.description %}
+  description: ${{values.description | dump}}
+  {%- endif %}
+spec:
+  type: openapi
+  lifecycle: experimental
+  owner: ${{values.owner | dump}}
+  definition:
+    $text: ./openapi.yaml
+
