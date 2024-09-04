@@ -1,0 +1,72 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: quarkus-camel-template
+  title: Camel Quarkus Application
+  description: Create a Camel Quarkus application.
+  tags:
+    - recommenden
+    - quarkus
+    - camel
+    - microservice
+    - maven
+
+spec:
+  owner: mdelgadi@redhat.com
+  type: service
+# these are the steps which are rendered in the frontend with the form input
+  parameters:
+    - title: Provide some simple information
+      required:
+        - name
+        - package
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Unique name of component
+          ui:field: EntityNamePicker
+        package:
+          title: Package
+          type: string
+          description: Package name
+    - title: Choose a location
+        required:
+          - repoUrl
+        properties:
+          repoUrl:
+            title: Repository location
+            type: string
+            ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+	# here are the steps that are executed in series in the scaffolder backend
+  steps:
+    - id: template 
+      name: Fetch Skeleton + Template
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          name: ${{ parameters.name }}
+          package: ${{ parameters.package}}
+    
+    - id: publish
+      name: Publish:github
+      input:
+        allowedHosts: ["github.com"]
+        description: This is ${{ parameters.name }}
+        repoUrl: ${{ parameters.repoUrl }}
+        defaultBranch: main
+
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: "/catalog-info.yaml"
+
+output:
+  remoteUrl: ${{ steps.publis.output.remoteUrl }}
+  entityRef: ${{ steps.register.output.entityRef }}
