@@ -53,7 +53,7 @@ steps:
         package: ${{ parameters.package}}
     
   - id: publish
-    name: Publish:
+    name: Publish
     action: publish:github
     input:
       allowedHosts: ["github.com"]
