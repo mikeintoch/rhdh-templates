@@ -12,7 +12,7 @@ metadata:
     - maven
 
 spec:
-  owner: mdelgadi@redhat.com
+  owner: rhdh
   type: service
 # these are the steps which are rendered in the frontend with the form input
   parameters:
@@ -31,6 +31,10 @@ spec:
           title: Package
           type: string
           description: Package name
+        description: 
+          title: Description
+          type: string
+          description: Help others understand what this service is for.
         owner:
           title: owner
           type: string
@@ -57,9 +61,12 @@ spec:
       action: fetch:template
       input:
         url: ./skeleton
+        copyWithoutTemplating:
+          - .github/workflows/*
         values:
           name: ${{ parameters.name }}
           package: ${{ parameters.package}}
+          destination: ${{ parameters.repoUrl | parseRepoUrl }}
           owner: ${{ parameters.owner }}
           host: ${{ parameters.repo.host }}
           destination_own: ${{ parameters.repo.owner }}
@@ -82,5 +89,9 @@ spec:
         catalogInfoPath: "/catalog-info.yaml"
 
   output:
-    remoteUrl: ${{ steps.publis.output.remoteUrl }}
-    entityRef: ${{ steps.register.output.entityRef }}
+    links:
+      - title: Source Code Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: Open Component in catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
