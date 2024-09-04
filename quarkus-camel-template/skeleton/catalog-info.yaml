@@ -11,8 +11,6 @@ metadata:
   tags:
     - java
     - quarkus
-  annotations:
-    github.com/project-slug: ${{values.destination.owner + "/" + values.destination.repo}}
   links:
     - url: https://workspaces.openshift.com/#https://github.com/${{values.destination.owner}}/${{values.destination.repo}}
       title: Openshift Dev Spaces (VS Code)
