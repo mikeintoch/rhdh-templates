@@ -5,6 +5,9 @@ metadata:
   {%- if values.description %}
   description: ${{values.description | dump}}
   {%- endif %}
+  annotations:
+    backstage.io/source-location: url:https://${{values.host}}/${{values.destination}}
+    backstage.io/techdocs-ref: url:https://${{values.host}}/${{values.destination}}
   tags:
     - java
     - quarkus
