@@ -41,7 +41,7 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
-	# here are the steps that are executed in series in the scaffolder backend
+#here are the steps that are executed in series in the scaffolder backend
 steps:
   - id: template 
     name: Fetch Skeleton + Template
@@ -67,7 +67,7 @@ steps:
     input:
       repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
       catalogInfoPath: "/catalog-info.yaml"
-      
+
 output:
   remoteUrl: ${{ steps.publis.output.remoteUrl }}
   entityRef: ${{ steps.register.output.entityRef }}
