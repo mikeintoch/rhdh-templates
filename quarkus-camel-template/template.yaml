@@ -5,7 +5,7 @@ metadata:
   title: Camel Quarkus Application
   description: Create a Camel Quarkus application.
   tags:
-    - recommenden
+    - recommended
     - quarkus
     - camel
     - microservice
@@ -32,7 +32,7 @@ spec:
           description: Package name
     - title: Choose a location
       required:
-          - repoUrl
+        - repoUrl
       properties:
         repoUrl:
           title: Repository location
