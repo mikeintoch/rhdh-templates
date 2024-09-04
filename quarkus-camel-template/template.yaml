@@ -20,6 +20,7 @@ spec:
       required:
         - name
         - package
+        - owner
       properties:
         name:
           title: Name
@@ -30,6 +31,14 @@ spec:
           title: Package
           type: string
           description: Package name
+        owner:
+          title: owner
+          type: string
+          description: Owner of the component
+          ui:field: OwnerPicker
+          ui:options:
+           allowedKinds:
+             - Group
     - title: Choose a location
       required:
         - repoUrl
@@ -51,6 +60,10 @@ spec:
         values:
           name: ${{ parameters.name }}
           package: ${{ parameters.package}}
+          owner: ${{ parameters.owner }}
+          host: ${{ parameters.repo.host }}
+          destination_own: ${{ parameters.repo.owner }}
+
     
     - id: publish
       name: Publish
