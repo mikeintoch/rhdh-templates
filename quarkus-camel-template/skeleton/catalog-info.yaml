@@ -6,8 +6,8 @@ metadata:
   description: ${{values.description | dump}}
   {%- endif %}
   annotations:
-    backstage.io/source-location: url:https://${{values.host}}/${{values.destination}}
-    backstage.io/techdocs-ref: url:https://${{values.host}}/${{values.destination}}
+    backstage.io/source-location: url:https://github.com/${{values.destination.owner}}/${{values.destination.repo}}
+    backstage.io/techdocs-ref: url:https://github.com/${{values.destination.owner}}/${{values.destination.repo}}
   tags:
     - java
     - quarkus
