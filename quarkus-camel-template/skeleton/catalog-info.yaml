@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: ${{values.name | dump}}
+  name: ${{values.artifactId | dump}}
   {%- if values.description %}
   description: ${{values.description | dump}}
   {%- endif %}
@@ -17,15 +17,16 @@ metadata:
       icon: web
 spec:
   type: service
+  system: ${{ values.system }}
   lifecycle: experimental
   owner: ${{values.owner | dump}}
   providedApis:
-    - ${{values.name | dump}}
+    - ${{values.artifactId | dump}}
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: ${{values.name | dump}}
+  name: ${{values.artifactId | dump}}
   {%- if values.description %}
   description: ${{values.description | dump}}
   {%- endif %}

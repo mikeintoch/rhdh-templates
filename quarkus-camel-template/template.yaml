@@ -16,33 +16,69 @@ spec:
   type: service
 # these are the steps which are rendered in the frontend with the form input
   parameters:
-    - title: Provide some simple information
+    - title: Provide information about the new component
       required:
-        - name
-        - package
+        - orgName
         - owner
+        - system
+        - port
       properties:
-        name:
-          title: Name
+        orgName:
+          title: Organization Name
           type: string
-          description: Unique name of component
-          ui:field: EntityNamePicker
-        package:
-          title: Package
-          type: string
-          description: Package name
         description: 
           title: Description
           type: string
-          description: Help others understand what this service is for.
+          description: Help others understand what the component is for.
         owner:
-          title: owner
+          title: Owner
           type: string
-          description: Owner of the component
-          ui:field: OwnerPicker
+          ui:field: EntityPicker
           ui:options:
-           allowedKinds:
-             - User
+            catalogFilter:
+              kind:
+                - Group
+                - User
+        system:
+          title: System
+          type: string
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              kind:
+                - System
+        port:
+          title: Port
+          type: Number
+          default: 8080
+          description: Override the port exposed for the application
+    - title: Provide information about Java metadata
+      required:
+        - groupId
+        - artifactId
+        - version
+        - javaPackageName
+      properties:
+        groupId:
+          title: Group ID
+          type: string
+          default: mx.redhat
+          description: Maven Group ID eg (mx.redhat)
+        artifactId:
+          title: Artifact ID
+          type: string
+          default: myapp
+          description: Maven Artifact ID
+        version:
+          title: Version
+          type: string
+          default: 1.0.0-SNAPSHOT
+          description: Maven Artifact Version
+        javaPackageName:
+          title: Java Package Name
+          type: string
+          default: mx.redhat.myapp
+          description: Name for the JAva Package (e.g. mx.redhat.myapp) should match GroupID and Artifact ID.
     - title: Choose a location
       required:
         - repoUrl
@@ -64,10 +100,17 @@ spec:
         copyWithoutTemplating:
           - .github/workflows/*
         values:
-          name: ${{ parameters.name }}
-          package: ${{ parameters.package}}
-          destination: ${{ parameters.repoUrl | parseRepoUrl }}
+          orgName: ${{ parameters.orgName }}
           owner: ${{ parameters.owner }}
+          system: ${{ parameters.system }}
+          applicationType: api
+          description: ${{ parameters.description }}
+          port: ${{ parementers.port }}
+          groupId: ${{ parameters.groupId }}
+          artifactId: ${{ parameters.artifactId }}
+          version: ${{ parameters.version }}
+          javaPackageName: ${{ parameters.javaPackageName }}
+          destination: ${{ parameters.repoUrl | parseRepoUrl }}
           host: ${{ parameters.repo.host }}
           destination_own: ${{ parameters.repo.owner }}
 
