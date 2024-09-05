@@ -4,7 +4,7 @@ metadata:
 components:
   - name: development-tooling
     container:
-      image: quay.io/devfile/universal-developer-image:ubi8-277c10c
+      image: registry.access.redhat.com/ubi8/openjdk-17:1.20-2.1721231681
       env:
         - name: QUARKUS_HTTP_HOST
           value: 0.0.0.0
