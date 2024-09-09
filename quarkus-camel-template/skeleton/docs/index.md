@@ -1,3 +1,3 @@
-# ${{values.name}} Documentation
+# ${{values.artifactId}} Documentation
 
 ${{values.description}}
