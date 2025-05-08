@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>${{ values.gruoupId }}</groupId>
     <artifactId>${{ values.artifactId }}</artifactId>
-    <version>${{ values.version }}</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>${{ values.artifactId }}</name>
     <description>${{ values.description }}</description>

@@ -11,7 +11,6 @@ metadata:
     - microservice
     - maven
     - java
-
 spec:
   owner: mikeintoch
   type: service
@@ -21,18 +20,15 @@ spec:
     - title: Provide information about the new component
       required:
         - appName
-        - orgName
         - owner
         - system
-        - port
       properties:
         appName:
           title: App name
           type: string
           default: sample-quarkus-camel-app
-        orgName:
-          title: Organization Name
-          type: string
+          ui:options:
+            rows: 5
         description: 
           title: Description
           type: string
@@ -40,12 +36,10 @@ spec:
         owner:
           title: Owner
           type: string
-          ui:field: EntityPicker
+          ui:field: OwnerPicker
           ui:options:
             catalogFilter:
-              kind:
-                - Group
-                - User
+              kind: Group
         system:
           title: System
           type: string
@@ -54,16 +48,10 @@ spec:
             catalogFilter:
               kind:
                 - System
-        port:
-          title: Port
-          type: number
-          default: 8080
-          description: Override the port exposed for the application
     - title: Provide information about Java metadata
       required:
         - groupId
         - artifactId
-        - version
         - javaPackageName
       properties:
         groupId:
@@ -76,11 +64,6 @@ spec:
           type: string
           default: myapp
           description: Maven Artifact ID
-        version:
-          title: Version
-          type: string
-          default: 1.0.0-SNAPSHOT
-          description: Maven Artifact Version
         javaPackageName:
           title: Java Package Name
           type: string
@@ -108,12 +91,10 @@ spec:
           - .github/workflows/*
         values:
           appName: ${{ parameters.appName }}
-          orgName: ${{ parameters.orgName }}
           owner: ${{ parameters.owner }}
           system: ${{ parameters.system }}
           applicationType: api
           description: ${{ parameters.description }}
-          port: ${{ parementers.port }}
           groupId: ${{ parameters.groupId }}
           artifactId: ${{ parameters.artifactId }}
           version: ${{ parameters.version }}
@@ -131,7 +112,6 @@ spec:
         description: ${{ parameters.description }}
         repoUrl: ${{ parameters.repoUrl }}
         defaultBranch: main
-        protectDefaultBranch: false
         repoVisibility: public
 
     - id: register
