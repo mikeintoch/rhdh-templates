@@ -129,7 +129,7 @@ spec:
       input:
         allowedHosts: ["github.com"]
         description: ${{ parameters.description }}
-        repoUrl: ${{ parameters.repoUrl }}?owner=${{ parameters.orgName }}&repo=${{ parameters.appName }}
+        repoUrl: ${{ parameters.repoUrl }}
         defaultBranch: main
         protectDefaultBranch: false
         repoVisibility: public
