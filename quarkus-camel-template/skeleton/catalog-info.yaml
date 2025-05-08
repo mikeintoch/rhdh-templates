@@ -1,20 +1,18 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: ${{values.appName | dump}}
+  name: ${{values.component_id | dump}}
   {%- if values.description %}
   description: ${{values.description | dump}}
   {%- endif %}
   annotations:
-    backstage.io/source-location: url:https://github.com/${{values.destination.owner}}/${{values.destination.repo}}
-    backstage.io/techdocs-ref: url:https://github.com/${{values.destination.owner}}/${{values.destination.repo}}
-    github.com/project-slug: ${{values.destination.owner}}/${{values.destination.repo}}
-    argocd/app-name: ${{values.appName | dump}}
+    backstage.io/source-location: url:https://${{ values.host }}/${{ values.destination }}
+    backstage.io/techdocs-ref: url:https://${{ values.host }}/${{ values.destination }}
+    github.com/project-slug: ${{ values.destination }}
+    argocd/app-name: ${{values.component_id | dump}}
   tags:
     - java
     - quarkus
-    - maven
-    - argocd
 
   links:
     - url: https://workspaces.openshift.com/#https://github.com/${{values.destination.owner}}/${{values.destination.repo}}
@@ -22,16 +20,15 @@ metadata:
       icon: web
 spec:
   type: service
-  system: ${{ values.system }}
   lifecycle: experimental
   owner: ${{values.owner | dump}}
   providedApis:
-    - ${{values.artifactId | dump}}
+    - ${{values.component_id | dump}}
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: ${{values.artifactId | dump}}
+  name: ${{values.component_id | dump}}
   {%- if values.description %}
   description: ${{values.description | dump}}
   {%- endif %}

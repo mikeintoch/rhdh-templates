@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ${{ values.javaPackageName }};
+package ${{ values.java_package_name }};
 
 import java.util.Objects;
 
