@@ -86,8 +86,7 @@ spec:
         values:
           component_id: ${{ parameters.component_id }}
           description: ${{ parameters.description }}
-          owner: ${{ parameters.owner }}
-          system: ${{ parameters.system }}
+          owner: ${{ parameters.metadata.name }}
           applicationType: api
           group_id: ${{ parameters.group_id }}
           artifact_id: ${{ parameters.artifact_id }}
@@ -101,8 +100,7 @@ spec:
       input:
         allowedHosts: ["github.com"]
         description: ${{ parameters.description }}
-        repoUrl:  ${{ parameters.repo.host }}
-        #repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{ parameters.component_id }}"
+        repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{ parameters.component_id }}"
         defaultBranch: main
         repoVisibility: public
 
