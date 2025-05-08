@@ -1,16 +1,21 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: ${{values.artifactId | dump}}
+  name: ${{values.appName | dump}}
   {%- if values.description %}
   description: ${{values.description | dump}}
   {%- endif %}
   annotations:
     backstage.io/source-location: url:https://github.com/${{values.destination.owner}}/${{values.destination.repo}}
     backstage.io/techdocs-ref: url:https://github.com/${{values.destination.owner}}/${{values.destination.repo}}
+    github.com/project-slug: ${{values.destination.owner}}/${{values.destination.repo}}
+    argocd/app-name: ${{values.appName | dump}}
   tags:
     - java
     - quarkus
+    - maven
+    - argocd
+
   links:
     - url: https://workspaces.openshift.com/#https://github.com/${{values.destination.owner}}/${{values.destination.repo}}
       title: Openshift Dev Spaces (VS Code)

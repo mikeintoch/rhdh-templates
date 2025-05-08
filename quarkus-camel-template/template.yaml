@@ -2,27 +2,34 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: quarkus-camel-template
-  title: Camel Quarkus Application
-  description: Create a Camel Quarkus application.
+  title: Create a Camel Quarkus Application for Kubernetes
+  description: Create a Camel Quarkus Application for Kubernetes
   tags:
     - recommended
     - quarkus
     - camel
     - microservice
     - maven
+    - java
 
 spec:
-  owner: rhdh
+  owner: mikeintoch
   type: service
+  system: microservices
 # these are the steps which are rendered in the frontend with the form input
   parameters:
     - title: Provide information about the new component
       required:
+        - appName
         - orgName
         - owner
         - system
         - port
       properties:
+        appName:
+          title: App name
+          type: string
+          default: sample-quarkus-camel-app
         orgName:
           title: Organization Name
           type: string
@@ -62,8 +69,8 @@ spec:
         groupId:
           title: Group ID
           type: string
-          default: mx.redhat
-          description: Maven Group ID eg (mx.redhat)
+          default: dev.mikeintoch
+          description: Maven Group ID eg (dev.mikeintoch)
         artifactId:
           title: Artifact ID
           type: string
@@ -77,8 +84,8 @@ spec:
         javaPackageName:
           title: Java Package Name
           type: string
-          default: mx.redhat.myapp
-          description: Name for the JAva Package (e.g. mx.redhat.myapp) should match GroupID and Artifact ID.
+          default: dev/mikeintoch/myapp
+          description: Name for the Java Package (e.g. mx.redhat.myapp) should match GroupID and Artifact ID.
     - title: Choose a location
       required:
         - repoUrl
@@ -100,6 +107,7 @@ spec:
         copyWithoutTemplating:
           - .github/workflows/*
         values:
+          appName: ${{ parameters.appName }}
           orgName: ${{ parameters.orgName }}
           owner: ${{ parameters.owner }}
           system: ${{ parameters.system }}
@@ -120,9 +128,11 @@ spec:
       action: publish:github
       input:
         allowedHosts: ["github.com"]
-        description: This is ${{ parameters.name }}
-        repoUrl: ${{ parameters.repoUrl }}
+        description: ${{ parameters.description }}
+        repoUrl: ${{ parameters.repoUrl }}?owner=${{ parameters.orgName }}&repo=${{ parameters.appName }}
         defaultBranch: main
+        protectDefaultBranch: false
+        repoVisibility: public
 
     - id: register
       name: Register
