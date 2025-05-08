@@ -58,21 +58,22 @@ spec:
       properties:
         repo:
           title: Repository Location
-          type: string
-          description: The location of the repository where the application will be created.
-          default: github.com
-          enum:
-            - github.com
-          ui:options:
-            allowedHosts:
+          type: object
+          properties:
+            host:
+              title: Repo Host
+              type: string
+              description: The location of the repository where the application will be created.
+              default: github.com
+              enum:
               - github.com
-        owner:
-          title: Repo Owner
-          type: string
-          description: The owner of the repository where the application will be created.
-          default: mikeintoch
-          enum:
-            - mikeintoch
+            owner:
+              title: Repo Owner
+              type: string
+              description: The owner of the repository where the application will be created.
+              default: mikeintoch
+              enum:
+              - mikeintoch
 #here are the steps that are executed in series in the scaffolder backend
   steps:
     - id: template 
