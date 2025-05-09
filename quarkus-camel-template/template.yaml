@@ -86,7 +86,7 @@ spec:
         values:
           component_id: ${{ parameters.component_id }}
           description: ${{ parameters.description }}
-          owner: ${{ parameters.metadata.name }}
+          owner: ${{ user.entity.metadata.name }}
           applicationType: api
           group_id: ${{ parameters.group_id }}
           artifact_id: ${{ parameters.artifact_id }}
