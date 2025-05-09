@@ -108,7 +108,8 @@ spec:
       name: Register
       action: catalog:register
       input:
-        repoUrl: "${{ parameters.repo.host}}?owner=${{ parameters.repo.owner }}&repo=${{ parameters.component_id }}"
+        repoContentsUrl:  ${{ steps.publish.output.repoContentsUrl }}
+        #repoContentsUrl: "${{ parameters.repo.host}}?owner=${{ parameters.repo.owner }}&repo=${{ parameters.component_id }}"
         catalogInfoPath: "/catalog-info.yaml"
 
   output:
