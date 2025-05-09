@@ -1,6 +1,6 @@
 site_name: ${{values.artifactId}}
 site_description: ${{values.description}}
-repo_url: https://github.com/${{values.destination.owner}}/${{values.destination.repo}}
+repo_url: https://https://${{ values.host }}/${{ values.destination }}
 edit_uri: edit/master/docs
 
 plugins:
