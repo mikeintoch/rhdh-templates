@@ -13,9 +13,8 @@ metadata:
   tags:
     - java
     - quarkus
-
   links:
-    - url: https://workspaces.openshift.com/#https//${{ values.host }}/${{ values.destination }}
+    - url: https://workspaces.openshift.com/#https://${{ values.host }}/${{ values.destination }}
       title: Openshift Dev Spaces (VS Code)
       icon: web
 spec:

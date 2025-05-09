@@ -11,7 +11,7 @@ metadata:
     - microservice
     - java
 spec:
-  owner: mikeintoch
+  owner: rhdh
   type: service
   system: microservices
 # these are the steps which are rendered in the frontend with the form input
@@ -86,7 +86,7 @@ spec:
         values:
           component_id: ${{ parameters.component_id }}
           description: ${{ parameters.description }}
-          owner: ${{ user.entity.metadata.name }}
+          owner: ${{ parameters.repo.owner }}
           applicationType: api
           group_id: ${{ parameters.group_id }}
           artifact_id: ${{ parameters.artifact_id }}
