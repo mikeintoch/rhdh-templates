@@ -109,7 +109,6 @@ spec:
       action: catalog:register
       input:
         repoContentsUrl:  ${{ steps.publish.output.repoContentsUrl }}
-        #repoContentsUrl: "${{ parameters.repo.host}}?owner=${{ parameters.repo.owner }}&repo=${{ parameters.component_id }}"
         catalogInfoPath: "/catalog-info.yaml"
 
   output:
