@@ -118,7 +118,7 @@ spec:
         url: ./manifests
         copyWithoutTemplating: []
         values:
-        component_id: ${{ parameters.component_id }}
+          component_id: ${{ parameters.component_id }}
           description: ${{ parameters.description }}
           destination: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.component_id}}-gitops.git
           source_repository: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.component_id}}.git
