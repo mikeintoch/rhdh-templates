@@ -137,6 +137,17 @@ spec:
           user: ${{ user.entity.metadata.name }}
         targetPath: ./tenant-gitops
 
+    - id: publish
+      name: Publish
+      action: publish:github
+      input:
+        allowedHosts: ["github.com"]
+        description: gitops resources for ${{ parameters.component_id }}
+        repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{ parameters.component_id }}"
+        sourcePath: ./tenant-gitops
+        defaultBranch: main
+        repoVisibility: public
+
   output:
     links:
       - title: Source Code Repository
