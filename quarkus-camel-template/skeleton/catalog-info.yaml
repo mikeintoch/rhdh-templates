@@ -9,7 +9,8 @@ metadata:
     backstage.io/source-location: url:https://${{ values.host }}/${{ values.destination }}
     backstage.io/techdocs-ref: url:https://${{ values.host }}/${{ values.destination }}
     github.com/project-slug: ${{ values.destination }}
-    argocd/app-name: ${{values.component_id}}-bootstrap
+    argocd/app-name: ${{values.component_id}}
+    backstage.io/kubernetes-id: ${{values.component_id}}
   tags:
     - java
     - quarkus
@@ -31,6 +32,11 @@ metadata:
   {%- if values.description %}
   description: ${{values.description | dump}}
   {%- endif %}
+  annotations:
+    backstage.io/source-location: url:https://${{ values.host }}/${{ values.destination }}
+    backstage.io/techdocs-ref: url:https://${{ values.host }}/${{ values.destination }}
+    github.com/project-slug: ${{ values.destination }}
+    argocd/app-name: ${{values.component_id}}-bootstrap
 spec:
   type: openapi
   lifecycle: experimental
